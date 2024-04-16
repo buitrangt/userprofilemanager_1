@@ -1,10 +1,9 @@
 package aibles.userprofilemanager_1.service.serviceImpl;
 
-
 import aibles.userprofilemanager_1.dto.UserProfileRequest;
 import aibles.userprofilemanager_1.dto.UserProfileResponse;
-
 import aibles.userprofilemanager_1.entity.UserProfileEntity;
+import aibles.userprofilemanager_1.exception.NotFoundException;
 import aibles.userprofilemanager_1.repository.UserProfileRepository;
 import aibles.userprofilemanager_1.service.mapping.UserProfileMapping;
 import aibles.userprofilemanager_1.service.service.UserProfileService;
@@ -34,7 +33,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public UserProfileResponse updateUserProfile(Long id, UserProfileRequest request) {
         UserProfileEntity entity = userProfileRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User profile not found for this id :: " + id));
+                .orElseThrow(() -> new NotFoundException("User profile not found for this id: " + id));
         entity.setUsername(request.getUsername());
         entity.setEmail(request.getEmail());
         UserProfileEntity updatedEntity = userProfileRepository.save(entity);
@@ -43,13 +42,16 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public void deleteUserProfile(Long id) {
+        if (!userProfileRepository.existsById(id)) {
+            throw new NotFoundException("User profile not found for this id: " + id);
+        }
         userProfileRepository.deleteById(id);
     }
 
     @Override
     public UserProfileResponse getUserProfileById(Long id) {
         UserProfileEntity entity = userProfileRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User profile not found for this id :: " + id));
+                .orElseThrow(() -> new NotFoundException("User profile not found for this id: " + id));
         return UserProfileMapping.convertEntityToDto(entity);
     }
 

@@ -3,6 +3,7 @@ package aibles.userprofilemanager_1.service.serviceImpl;
 import aibles.userprofilemanager_1.dto.ImageRequest;
 import aibles.userprofilemanager_1.dto.ImageResponse;
 import aibles.userprofilemanager_1.entity.ImageEntity;
+import aibles.userprofilemanager_1.exception.NotFoundException;
 import aibles.userprofilemanager_1.repository.ImageRepository;
 import aibles.userprofilemanager_1.service.mapping.ImageMapping;
 import aibles.userprofilemanager_1.service.service.ImageService;
@@ -35,7 +36,7 @@ public class ImageServiceImpl implements ImageService {
     public ImageResponse getImageById(Long id) {
         return imageRepository.findById(id)
                 .map(ImageMapping::convertEntityToImageResponse)
-                .orElseThrow(() -> new IllegalArgumentException("Image not found with ID: " + id));
+                .orElseThrow(() -> new NotFoundException("Image not found with ID: " + id));
     }
 
     @Override
@@ -45,25 +46,26 @@ public class ImageServiceImpl implements ImageService {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     @Transactional
     public ImageResponse updateImage(Long id, ImageRequest request) {
         ImageEntity entity = imageRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Image not found with ID: " + id));
-
-        entity.setUrl(request.getUrl());
-        // Cập nhật các trường khác của ImageEntity nếu cần
+                .orElseThrow(() -> new NotFoundException("Image not found with ID: " + id));
+        updateEntityFields(entity, request);
         imageRepository.save(entity);
-
         return ImageMapping.convertEntityToImageResponse(entity);
+    }
+
+    private void updateEntityFields(ImageEntity entity, ImageRequest request) {
+        entity.setUrl(request.getUrl());
+        // Add more fields to update as necessary
     }
 
     @Override
     @Transactional
     public void deleteImage(Long id) {
         if (!imageRepository.existsById(id)) {
-            throw new IllegalArgumentException("Image not found with ID: " + id);
+            throw new NotFoundException("Image not found with ID: " + id);
         }
         imageRepository.deleteById(id);
     }

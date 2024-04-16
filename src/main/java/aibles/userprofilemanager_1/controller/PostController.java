@@ -1,52 +1,52 @@
 package aibles.userprofilemanager_1.controller;
 
-
 import aibles.userprofilemanager_1.dto.PostRequest;
 import aibles.userprofilemanager_1.dto.PostResponse;
 import aibles.userprofilemanager_1.service.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/students")
+@RequestMapping("/api/v1/posts")
 public class PostController {
+
     private final PostService postService;
 
     @Autowired
-    private PostController(PostService postService)
-    {
-        this.postService=postService;
+    public PostController(PostService postService) {
+        this.postService = postService;
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public PostResponse craetePost(@RequestBody PostRequest request)
-    {
-        return postService.create(request);
+    public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest request) {
+        PostResponse response = postService.create(request);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public List<PostResponse> getAllStudents() {
-        return postService.getAllPosts();
+    public ResponseEntity<List<PostResponse>> getAllPosts() {
+        List<PostResponse> responses = postService.getAllPosts();
+        return ResponseEntity.ok(responses);
     }
 
     @GetMapping("/{id}")
-    public PostResponse getStudentById(@PathVariable Long id) {
-        return postService.getPostById(id);
+    public ResponseEntity<PostResponse> getPostById(@PathVariable Long id) {
+        PostResponse response = postService.getPostById(id);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public PostResponse updateStudent(@PathVariable Long id, @RequestBody PostRequest request) {
-        return postService.updatePosts(id, request);
+    public ResponseEntity<PostResponse> updatePost(@PathVariable Long id, @RequestBody PostRequest request) {
+        PostResponse updatedPost = postService.updatePosts(id, request);
+        return ResponseEntity.ok(updatedPost);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteStudent(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         postService.deletePost(id);
+        return ResponseEntity.ok().build();
     }
 }
