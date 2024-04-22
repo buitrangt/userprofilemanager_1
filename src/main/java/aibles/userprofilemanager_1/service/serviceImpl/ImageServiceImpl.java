@@ -34,7 +34,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public ImageResponse getImageById(Long id) {
-        return imageRepository.findById(id)
+        return imageRepository.findById(String.valueOf(id))
                 .map(ImageMapping::convertEntityToImageResponse)
                 .orElseThrow(() -> new NotFoundException("Image not found with ID: " + id));
     }
@@ -49,7 +49,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     @Transactional
     public ImageResponse updateImage(Long id, ImageRequest request) {
-        ImageEntity entity = imageRepository.findById(id)
+        ImageEntity entity = imageRepository.findById(String.valueOf(id))
                 .orElseThrow(() -> new NotFoundException("Image not found with ID: " + id));
         updateEntityFields(entity, request);
         imageRepository.save(entity);
@@ -64,9 +64,9 @@ public class ImageServiceImpl implements ImageService {
     @Override
     @Transactional
     public void deleteImage(Long id) {
-        if (!imageRepository.existsById(id)) {
+        if (!imageRepository.existsById(String.valueOf(id))) {
             throw new NotFoundException("Image not found with ID: " + id);
         }
-        imageRepository.deleteById(id);
+        imageRepository.deleteById(String.valueOf(id));
     }
 }

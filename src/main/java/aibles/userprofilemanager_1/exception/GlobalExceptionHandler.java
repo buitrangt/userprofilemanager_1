@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
-    @ExceptionHandler(xception.class)
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGeneralException(Exception ex)
     {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

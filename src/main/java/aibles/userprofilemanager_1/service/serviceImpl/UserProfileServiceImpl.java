@@ -62,4 +62,13 @@ public class UserProfileServiceImpl implements UserProfileService {
                 .map(UserProfileMapping::convertEntityToDto)
                 .collect(Collectors.toList());
     }
+    @Override
+    public UserProfileResponse getUserProfileByUsername(String username) {
+        // Giả sử chúng ta có một phương thức trong repository để tìm người dùng theo username
+        return userProfileRepository.findByUsername(username)
+                .map(user -> new UserProfileResponse(user.getId(), user.getUsername(), user.getEmail(), user.getRole()))
+                .orElseThrow(() -> new RuntimeException("User not found with username: " + username));
+    }
+
+
 }

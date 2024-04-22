@@ -4,6 +4,8 @@ import aibles.userprofilemanager_1.dto.UserProfileRequest;
 import aibles.userprofilemanager_1.dto.UserProfileResponse;
 import aibles.userprofilemanager_1.entity.UserProfileEntity;
 
+
+
 public class UserProfileMapping {
     public static UserProfileEntity convertDtoToEntity(UserProfileRequest dto) {
         UserProfileEntity entity = new UserProfileEntity();
@@ -13,10 +15,11 @@ public class UserProfileMapping {
     }
 
     public static UserProfileResponse convertEntityToDto(UserProfileEntity entity) {
-        UserProfileResponse dto = new UserProfileResponse();
+        UserProfileResponse dto = new UserProfileResponse(entity.getId(), entity.getUsername(), entity.getEmail(), entity.getRole());
         dto.setId(entity.getId());
         dto.setUsername(entity.getUsername());
         dto.setEmail(entity.getEmail());
         return dto;
     }
 }
+

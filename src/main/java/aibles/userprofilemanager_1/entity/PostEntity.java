@@ -3,8 +3,10 @@ package aibles.userprofilemanager_1.entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name="posts")
+
 public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +14,7 @@ public class PostEntity {
 
     private String title;
     private String content;
+
 
     @ManyToOne
     @JoinColumn(name="user_profile_id")
@@ -48,4 +51,7 @@ public class PostEntity {
     public void setUserProfile(aibles.userprofilemanager_1.entity.UserProfileEntity userProfile) {
         UserProfile = userProfile;
     }
+
+
 }
+

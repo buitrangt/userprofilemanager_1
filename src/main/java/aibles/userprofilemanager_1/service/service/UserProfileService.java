@@ -12,4 +12,5 @@ public interface UserProfileService {
     void deleteUserProfile(Long id);
     UserProfileResponse getUserProfileById(Long id);
     List<UserProfileResponse> getAllUserProfiles();
+    UserProfileResponse getUserProfileByUsername(String username);
 }

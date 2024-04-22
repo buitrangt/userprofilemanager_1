@@ -3,8 +3,10 @@ package aibles.userprofilemanager_1.entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name="images")
+
 public class ImageEntity {
 
     @Id

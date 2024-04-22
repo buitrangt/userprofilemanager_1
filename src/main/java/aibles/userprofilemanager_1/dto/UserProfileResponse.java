@@ -1,17 +1,23 @@
 package aibles.userprofilemanager_1.dto;
 
-import aibles.userprofilemanager_1.dto.UserProfileRequest;
-
 public class UserProfileResponse extends UserProfileRequest {
     private Long id;
+    private String role;
 
     // Constructors
-    public UserProfileResponse() {
+    public UserProfileResponse(Long id, String username, String email, String role) {
     }
 
     // Getters and Setters
     public Long getId() {
         return id;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setId(Long id) {
@@ -22,8 +28,7 @@ public class UserProfileResponse extends UserProfileRequest {
     public String toString() {
         return "UserProfileResponse{" +
                 "id=" + id +
-                ", username='" + getUsername() + '\'' +
-                ", email='" + getEmail() + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

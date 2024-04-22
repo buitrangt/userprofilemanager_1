@@ -3,7 +3,9 @@ package aibles.userprofilemanager_1.entity;
 
 import jakarta.persistence.*;
 
-@Entity@Table(name="User_profiles")
+
+@Entity
+@Table(name="User_profiles")
 
 public class UserProfileEntity {
     @Id
@@ -11,6 +13,8 @@ public class UserProfileEntity {
     private Long id;
     private String username;
     private String email;
+    @Column(name = "role")
+    private String role;
 
     public Long getId() {
         return id;
@@ -34,5 +38,12 @@ public class UserProfileEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
     }
 }
