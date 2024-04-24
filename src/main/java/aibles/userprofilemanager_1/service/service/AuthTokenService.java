@@ -63,5 +63,7 @@ public interface AuthTokenService {
      * @return true if the token is valid, otherwise false
      */
     boolean validateRefreshToken(String token, String userId);
+
+    String getUserIdFromToken(String token);
 }
 

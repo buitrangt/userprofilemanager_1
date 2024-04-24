@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
+
+
 
 @Service
 public class AuthTokenServiceImpl implements AuthTokenService {
@@ -108,5 +109,15 @@ public class AuthTokenServiceImpl implements AuthTokenService {
 //    private boolean isTokenExpired(String token) {
 //        return getAllClaimsFromToken(token).getExpiration().before(new Date());
 //    }
+
+    @Override
+    public String getUserIdFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET_KEY.getBytes())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
+    }
 }
 

@@ -1,15 +1,15 @@
 package aibles.userprofilemanager_1.dto;
 
 public class UserProfileResponse extends UserProfileRequest {
-    private Long id;
+    private String id;
     private String role;
 
     // Constructors
-    public UserProfileResponse(Long id, String username, String email, String role) {
+    public UserProfileResponse(String id, String username, String email, String role) {
     }
 
     // Getters and Setters
-    public Long getId() {
+    public String  getId() {
         return id;
     }
     public String getRole() {
@@ -20,7 +20,7 @@ public class UserProfileResponse extends UserProfileRequest {
         this.role = role;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -32,7 +32,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfileResponse updateUserProfile(Long id, UserProfileRequest request) {
-        UserProfileEntity entity = userProfileRepository.findById(id)
+        UserProfileEntity entity = userProfileRepository.findById(String.valueOf(id))
                 .orElseThrow(() -> new NotFoundException("User profile not found for this id: " + id));
         entity.setUsername(request.getUsername());
         entity.setEmail(request.getEmail());
@@ -42,15 +42,15 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public void deleteUserProfile(Long id) {
-        if (!userProfileRepository.existsById(id)) {
+        if (!userProfileRepository.existsById(String.valueOf(id))) {
             throw new NotFoundException("User profile not found for this id: " + id);
         }
-        userProfileRepository.deleteById(id);
+        userProfileRepository.deleteById(String.valueOf(id));
     }
 
     @Override
     public UserProfileResponse getUserProfileById(Long id) {
-        UserProfileEntity entity = userProfileRepository.findById(id)
+        UserProfileEntity entity = userProfileRepository.findById(String.valueOf(id))
                 .orElseThrow(() -> new NotFoundException("User profile not found for this id: " + id));
         return UserProfileMapping.convertEntityToDto(entity);
     }
