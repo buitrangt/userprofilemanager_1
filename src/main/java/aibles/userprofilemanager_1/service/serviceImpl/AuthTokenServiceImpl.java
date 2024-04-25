@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.function.Function;
 
 
 @Service
@@ -37,22 +37,22 @@ public class AuthTokenServiceImpl implements AuthTokenService {
     public String getSubjectFromAccessToken(String token) {
         return "";
     }
-
-    @Override
-    public boolean validateAccessToken(String token, String userId) {
-        return false;
-    }
 //
+//    @Override
+//    public boolean validateAccessToken(String token, String userId) {
+//        return false;
+//    }
+
 //    @Override
 //    public String getSubjectFromAccessToken(String token) {
 //        return getClaimFromToken(token, Claims::getSubject);
 //    }
-//
-//    @Override
-//    public boolean validateAccessToken(String token, String userId) {
-//        final String subject = getSubjectFromAccessToken(token);
-//        return (userId.equals(subject) && !isTokenExpired(token));
-//    }
+
+    @Override
+    public boolean validateAccessToken(String token, String userId) {
+        final String subject = getSubjectFromAccessToken(token);
+        return (userId.equals(subject) && !isTokenExpired(token));
+    }
 
     @Override
     public String generateRefreshToken(String userId, String email, String username, String role) {
@@ -64,21 +64,21 @@ public class AuthTokenServiceImpl implements AuthTokenService {
         return "";
     }
 
-    @Override
-    public boolean validateRefreshToken(String token, String userId) {
-        return false;
-    }
-//
+//    @Override
+//    public boolean validateRefreshToken(String token, String userId) {
+//        return false;
+//    }
+//trung ten ham
 //    @Override
 //    public String getSubjectFromRefreshToken(String token) {
 //        return getClaimFromToken(token, Claims::getSubject);
 //    }
-//
-//    @Override
-//    public boolean validateRefreshToken(String token, String userId) {
-//        final String subject = getSubjectFromRefreshToken(token);
-//        return (userId.equals(subject) && !isTokenExpired(token));
-//    }
+
+    @Override
+    public boolean validateRefreshToken(String token, String userId) {
+        final String subject = getSubjectFromRefreshToken(token);
+        return (userId.equals(subject) && !isTokenExpired(token));
+    }
 
     private String createToken(String userId, String email, String username, String role, long validity) {
         Map<String, Object> claims = new HashMap<>();
@@ -94,21 +94,23 @@ public class AuthTokenServiceImpl implements AuthTokenService {
                 .compact();
     }
 
-//    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
-//        final Claims claims = getAllClaimsFromToken(token);
-//        return claimsResolver.apply(claims);
-//    }
-//
-//    private Claims getAllClaimsFromToken(String token) {
-//        return Jwts.parser()
-//                .setSigningKey(SECRET_KEY)
-//                //.parseClaimsJws(token)
-//                .getBody();
-//    }
-//
-//    private boolean isTokenExpired(String token) {
-//        return getAllClaimsFromToken(token).getExpiration().before(new Date());
-//    }
+    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
+    }
+//Cái này khả nng là do vvesion cũ/đoi a xiu vang anhhh
+    private Claims getAllClaimsFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY.getBytes())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+
+    private boolean isTokenExpired(String token) {
+        return getAllClaimsFromToken(token).getExpiration().before(new Date());
+    }
 
     @Override
     public String getUserIdFromToken(String token) {
@@ -118,6 +120,7 @@ public class AuthTokenServiceImpl implements AuthTokenService {
                 .parseClaimsJws(token)
                 .getBody();
         return claims.getSubject();
-    }
+    }//kaka doan nay co roi ma em nhi =)) .___. kho qua anhh><
+    //de thoi em, lam la hieu. Em chi can hieu cau truc cua jwt la se ro
 }
 

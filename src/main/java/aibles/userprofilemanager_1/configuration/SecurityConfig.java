@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.crypto.spec.SecretKeySpec;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
