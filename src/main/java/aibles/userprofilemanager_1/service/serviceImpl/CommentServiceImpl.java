@@ -33,7 +33,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional(readOnly = true)
     public List<CommentResponse> getAllCommentsByPostId(Long postId) {
-        List<CommentEntity> comments = commentRepository.findAllByPostId(postId);
+        List<CommentEntity> comments = commentRepository.findAllByPostId(String.valueOf(postId));
         return comments.stream()
                 .map(commentMapping::convertEntityToDto)
                 .collect(Collectors.toList());
@@ -42,9 +42,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public void deleteComment(Long commentId) {
-        if (!commentRepository.existsById(commentId)) {
+        if (!commentRepository.existsById(String.valueOf(commentId))) {
             throw new RuntimeException("Comment not found with id: " + commentId);
         }
-        commentRepository.deleteById(commentId);
+        commentRepository.deleteById(String.valueOf(commentId));
     }
 }

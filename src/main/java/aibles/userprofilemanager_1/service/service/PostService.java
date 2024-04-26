@@ -13,6 +13,6 @@ public interface PostService {
     PostResponse getPostById(Long id);
     PostResponse updatePosts(Long id, PostRequest request);
     void deletePost(Long id);
+    PostResponse sharePost(String userProfileId, String postId, PostRequest request, String author);
 
-   // Page<PostResponse> finAllPosts(Pageable pageable, String filter);
 }

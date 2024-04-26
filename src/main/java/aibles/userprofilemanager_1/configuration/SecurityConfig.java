@@ -20,7 +20,7 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String[] PUBLIC_ENDPOINTS = {"/auth/login", "/token/validate/access/**", "/token/validate/refresh/**"};
+    private final String[] PUBLIC_ENDPOINTS = {"/auth/login","/posts/1/share","/api/v1/userprofiles","/token/validate/access/**", "/token/validate/refresh/**"};
 
 
     @Value("${app.jwt.secret}")

@@ -4,6 +4,7 @@ package aibles.userprofilemanager_1.dto;
 public class CommentRequest {
     private String postId;
     private String content;
+    private String userId;
 
     // Getters and setters
     public String getPostId() {
@@ -23,4 +24,11 @@ public class CommentRequest {
     }
 
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

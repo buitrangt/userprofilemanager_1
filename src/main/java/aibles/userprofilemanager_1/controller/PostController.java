@@ -4,6 +4,7 @@ import aibles.userprofilemanager_1.dto.PostRequest;
 import aibles.userprofilemanager_1.dto.PostResponse;
 import aibles.userprofilemanager_1.service.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,4 +50,12 @@ public class PostController {
         postService.deletePost(id);
         return ResponseEntity.ok().build();
     }
+
+
+// Share a post
+@PostMapping("/{postId}/share")
+public ResponseEntity<PostResponse> sharePost(@PathVariable String postId, @RequestBody PostRequest request, @RequestParam String userProfileId, @RequestParam String author) {
+    PostResponse postResponse = postService.sharePost(userProfileId, postId, request, author);
+    return new ResponseEntity<>(postResponse, HttpStatus.OK);
+}
 }

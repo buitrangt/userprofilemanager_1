@@ -3,6 +3,7 @@ package aibles.userprofilemanager_1.service.serviceImpl;
 import aibles.userprofilemanager_1.dto.UserProfileRequest;
 import aibles.userprofilemanager_1.dto.UserProfileResponse;
 import aibles.userprofilemanager_1.entity.UserProfileEntity;
+import aibles.userprofilemanager_1.enums.Role;
 import aibles.userprofilemanager_1.exception.NotFoundException;
 import aibles.userprofilemanager_1.repository.UserProfileRepository;
 import aibles.userprofilemanager_1.service.mapping.UserProfileMapping;
@@ -10,6 +11,7 @@ import aibles.userprofilemanager_1.service.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,9 +28,17 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public UserProfileResponse createUserProfile(UserProfileRequest request) {
         UserProfileEntity entity = UserProfileMapping.convertDtoToEntity(request);
+
+        HashSet<String> roles = new HashSet<>();
+        roles.add(Role.USER.name());
+        // Cập nhật role trước khi lưu entity
+        entity.setRole(String.join(", ", roles));
+
         UserProfileEntity savedEntity = userProfileRepository.save(entity);
+
         return UserProfileMapping.convertEntityToDto(savedEntity);
     }
+
 
     @Override
     public UserProfileResponse updateUserProfile(Long id, UserProfileRequest request) {

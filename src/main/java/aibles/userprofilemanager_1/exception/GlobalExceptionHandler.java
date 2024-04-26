@@ -22,4 +22,10 @@ public class GlobalExceptionHandler {
     {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler(PostIdNotFoundException.class)
+    public ResponseEntity<Object> handlePostIdNotFoundException(PostIdNotFoundException ex) {
+        // Giả sử bạn cũng muốn trả về HTTP status NOT_FOUND cho loại ngoại lệ này
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }
