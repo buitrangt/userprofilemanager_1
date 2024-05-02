@@ -1,4 +1,6 @@
-package aibles.userprofilemanager_1.dto;
+package aibles.userprofilemanager_1.dto.response;
+
+import aibles.userprofilemanager_1.dto.request.CommentRequest;
 
 public class CommentResponse extends CommentRequest {
     private String id;

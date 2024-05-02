@@ -1,8 +1,7 @@
 package aibles.userprofilemanager_1.service.service;
 
-import aibles.userprofilemanager_1.dto.UserProfileRequest;
+import aibles.userprofilemanager_1.dto.request.UserProfileRequest;
 import aibles.userprofilemanager_1.dto.UserProfileResponse;
-
 
 import java.util.List;
 
@@ -12,5 +11,7 @@ public interface UserProfileService {
     void deleteUserProfile(Long id);
     UserProfileResponse getUserProfileById(Long id);
     List<UserProfileResponse> getAllUserProfiles();
-    UserProfileResponse getUserProfileByUsername(String username);
+
+    // Thêm phương thức mới để lấy thông tin người dùng dựa trên username
+     UserProfileResponse getUserProfileByUsername(String username) ;
 }

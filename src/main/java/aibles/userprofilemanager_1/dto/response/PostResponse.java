@@ -1,4 +1,6 @@
-package aibles.userprofilemanager_1.dto;
+package aibles.userprofilemanager_1.dto.response;
+
+import aibles.userprofilemanager_1.dto.request.PostRequest;
 
 public class PostResponse extends PostRequest {
     private String id;

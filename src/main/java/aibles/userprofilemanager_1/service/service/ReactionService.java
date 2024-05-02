@@ -1,8 +1,8 @@
 package aibles.userprofilemanager_1.service.service;
 
 
-import aibles.userprofilemanager_1.dto.ReactionRequest;
-import aibles.userprofilemanager_1.dto.ReactionResponse;
+import aibles.userprofilemanager_1.dto.request.ReactionRequest;
+import aibles.userprofilemanager_1.dto.response.ReactionResponse;
 import aibles.userprofilemanager_1.entity.PostEntity;
 import aibles.userprofilemanager_1.entity.ReactionEntity;
 import aibles.userprofilemanager_1.entity.UserProfileEntity;

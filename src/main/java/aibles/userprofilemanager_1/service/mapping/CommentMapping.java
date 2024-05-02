@@ -1,7 +1,7 @@
 package aibles.userprofilemanager_1.service.mapping;
 
-import aibles.userprofilemanager_1.dto.CommentRequest;
-import aibles.userprofilemanager_1.dto.CommentResponse;
+import aibles.userprofilemanager_1.dto.request.CommentRequest;
+import aibles.userprofilemanager_1.dto.response.CommentResponse;
 import aibles.userprofilemanager_1.entity.CommentEntity;
 import aibles.userprofilemanager_1.entity.PostEntity;
 import aibles.userprofilemanager_1.entity.UserProfileEntity;

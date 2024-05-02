@@ -1,6 +1,6 @@
 package aibles.userprofilemanager_1.service.serviceImpl;
 
-import aibles.userprofilemanager_1.dto.UserProfileRequest;
+import aibles.userprofilemanager_1.dto.request.UserProfileRequest;
 import aibles.userprofilemanager_1.dto.UserProfileResponse;
 import aibles.userprofilemanager_1.entity.UserProfileEntity;
 import aibles.userprofilemanager_1.enums.Role;

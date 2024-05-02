@@ -1,4 +1,4 @@
-package aibles.userprofilemanager_1.dto;
+package aibles.userprofilemanager_1.dto.response;
 
 
 

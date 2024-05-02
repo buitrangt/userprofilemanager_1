@@ -1,5 +1,7 @@
 package aibles.userprofilemanager_1.dto;
 
+import aibles.userprofilemanager_1.dto.request.UserProfileRequest;
+
 public class UserProfileResponse extends UserProfileRequest {
     private String id;
     private String role;

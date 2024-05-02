@@ -1,7 +1,7 @@
 package aibles.userprofilemanager_1.controller;
 
-import aibles.userprofilemanager_1.dto.ImageRequest;
-import aibles.userprofilemanager_1.dto.ImageResponse;
+import aibles.userprofilemanager_1.dto.request.ImageRequest;
+import aibles.userprofilemanager_1.dto.response.ImageResponse;
 
 import aibles.userprofilemanager_1.service.service.ImageService;
 import lombok.extern.slf4j.Slf4j;

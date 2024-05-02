@@ -1,7 +1,9 @@
 package aibles.userprofilemanager_1.controller;
 
-import aibles.userprofilemanager_1.dto.PostRequest;
-import aibles.userprofilemanager_1.dto.PostResponse;
+import aibles.userprofilemanager_1.dto.request.ImageRequest;
+import aibles.userprofilemanager_1.dto.request.PostRequest;
+import aibles.userprofilemanager_1.dto.response.ImageResponse;
+import aibles.userprofilemanager_1.dto.response.PostResponse;
 import aibles.userprofilemanager_1.service.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,10 +54,18 @@ public class PostController {
     }
 
 
-// Share a post
-@PostMapping("/{postId}/share")
-public ResponseEntity<PostResponse> sharePost(@PathVariable String postId, @RequestBody PostRequest request, @RequestParam String userProfileId, @RequestParam String author) {
-    PostResponse postResponse = postService.sharePost(userProfileId, postId, request, author);
-    return new ResponseEntity<>(postResponse, HttpStatus.OK);
-}
+    // Share a post
+    @PostMapping("/{postId}/share")
+    public ResponseEntity<PostResponse> sharePost(@PathVariable String postId, @RequestBody PostRequest request, @RequestParam String userProfileId, @RequestParam String author) {
+        PostResponse postResponse = postService.sharePost(userProfileId, postId, request, author);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/{postId}/images")
+    public ResponseEntity<ImageResponse> uploadImage(@PathVariable String postId, @RequestBody ImageRequest request) {
+        ImageResponse response = postService.uploadImage(postId, request);
+        return ResponseEntity.ok(response);
+    }
+
+
 }

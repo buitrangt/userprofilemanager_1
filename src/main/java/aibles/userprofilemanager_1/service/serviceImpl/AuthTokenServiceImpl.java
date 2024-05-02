@@ -1,12 +1,9 @@
 package aibles.userprofilemanager_1.service.serviceImpl;
 
-
-
 import aibles.userprofilemanager_1.service.service.AuthTokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
 
 @Service
 public class AuthTokenServiceImpl implements AuthTokenService {
@@ -35,18 +31,8 @@ public class AuthTokenServiceImpl implements AuthTokenService {
 
     @Override
     public String getSubjectFromAccessToken(String token) {
-        return "";
+        return getClaimFromToken(token, Claims::getSubject);
     }
-//
-//    @Override
-//    public boolean validateAccessToken(String token, String userId) {
-//        return false;
-//    }
-
-//    @Override
-//    public String getSubjectFromAccessToken(String token) {
-//        return getClaimFromToken(token, Claims::getSubject);
-//    }
 
     @Override
     public boolean validateAccessToken(String token, String userId) {
@@ -61,18 +47,8 @@ public class AuthTokenServiceImpl implements AuthTokenService {
 
     @Override
     public String getSubjectFromRefreshToken(String token) {
-        return "";
+        return getClaimFromToken(token, Claims::getSubject);
     }
-
-//    @Override
-//    public boolean validateRefreshToken(String token, String userId) {
-//        return false;
-//    }
-//trung ten ham
-//    @Override
-//    public String getSubjectFromRefreshToken(String token) {
-//        return getClaimFromToken(token, Claims::getSubject);
-//    }
 
     @Override
     public boolean validateRefreshToken(String token, String userId) {
@@ -98,7 +74,7 @@ public class AuthTokenServiceImpl implements AuthTokenService {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
-//Cái này khả nng là do vvesion cũ/đoi a xiu vang anhhh
+
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY.getBytes())
@@ -106,7 +82,6 @@ public class AuthTokenServiceImpl implements AuthTokenService {
                 .parseClaimsJws(token)
                 .getBody();
     }
-
 
     private boolean isTokenExpired(String token) {
         return getAllClaimsFromToken(token).getExpiration().before(new Date());
@@ -120,7 +95,5 @@ public class AuthTokenServiceImpl implements AuthTokenService {
                 .parseClaimsJws(token)
                 .getBody();
         return claims.getSubject();
-    }//kaka doan nay co roi ma em nhi =)) .___. kho qua anhh><
-    //de thoi em, lam la hieu. Em chi can hieu cau truc cua jwt la se ro
+    }
 }
-

@@ -38,7 +38,7 @@ public class UserProfileManagerConfiguration {
 
     @Bean
     public ImageService imageService() {
-        return new ImageServiceImpl(imageRepository);
+        return new ImageServiceImpl(imageRepository,postRepository);
     }
 
     @Bean
@@ -48,7 +48,7 @@ public class UserProfileManagerConfiguration {
 
     @Bean
     public PostService postService() {
-        return new PostServiceImpl(postRepository);
+        return new PostServiceImpl(postRepository, imageRepository);
     }
 
     @Bean

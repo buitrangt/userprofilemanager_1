@@ -1,7 +1,7 @@
 package aibles.userprofilemanager_1.service.mapping;
 
-import aibles.userprofilemanager_1.dto.PostRequest;
-import aibles.userprofilemanager_1.dto.PostResponse;
+import aibles.userprofilemanager_1.dto.request.PostRequest;
+import aibles.userprofilemanager_1.dto.response.PostResponse;
 import aibles.userprofilemanager_1.entity.PostEntity;
 
 public class PostMapping {

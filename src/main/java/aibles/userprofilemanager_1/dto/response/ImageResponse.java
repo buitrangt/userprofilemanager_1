@@ -1,4 +1,6 @@
-package aibles.userprofilemanager_1.dto;
+package aibles.userprofilemanager_1.dto.response;
+
+import aibles.userprofilemanager_1.dto.request.ImageRequest;
 
 public class ImageResponse extends ImageRequest {
     private String id;
